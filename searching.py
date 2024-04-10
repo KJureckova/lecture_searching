@@ -31,11 +31,27 @@ def linear_search(sequence, my_number):
     return results
 
 
+def pattern_search(sequence, pattern):
+    positions = set()
+    sequence_index = 0
+    n = len(sequence)
+    m = len(pattern)
+    while sequence_index < n - m:
+        if sequence[sequence_index:sequence_index + m] == pattern:
+            positions.add(sequence_index + m // 2)
+        sequence_index = sequence_index + 1
+    return positions
+
+
 def main():
     unordered_numbers = read_data("sequential.json", "unordered_numbers")
     number = 0
-    linear_search_results = linear_search(unordered_numbers, number)
-    print(linear_search_results)
+    number_positions = linear_search(unordered_numbers, number)
+    print(number_positions)
+
+    dna_seq = read_data("sequential.json", "dna_sequence")
+    pattern_positions = pattern_search(dna_seq, "ATA")
+    print(pattern_positions)
 
 
 if __name__ == '__main__':
